@@ -35,12 +35,16 @@ class Game:
     
         for event in pygame.event.get():
             if event.type == DOWN:
+                for ix, x in enumerate(self.grid):
+                    for iy, y in enumerate(self.grid[0]):
+                        print (y, end='')
+                print('') # create a new line
                 for x in range(len(self.grid)):
                     for y in range(len(self.grid[0])):
                         if self.grid[x][y] == True:
                             self.grid[x][y]= False
-                            # self.grid[x][y-1] = True
-                            print(x, y+1)
+                            self.grid[x][y-1] = True
+                            # print(x, y+1)
                     
             if event.type == QUIT:
                 self.running = False
@@ -98,14 +102,17 @@ class Game:
         self.score = 0
         self.title = RGBTitle(self.Font, "Tetris", (200, 550), [WHITE, RED, GREEN, BLUE, GREEN, RED])
 
-        
-        self.grid = []
-        for x in range(11):
-            self.grid.append([False] * 11)
+        grid_width = 11
+        grid_height = 11
+        self.grid = [[0 for x in range(grid_width)] for y in range(grid_height)] 
+
+        # self.grid = []
+        # for x in range(11):
+        #     self.grid.append([False] * 11)
         self.grid[5][5] = True
-        print(self.grid)
-        print(len(self.grid))
-        print(len(self.grid[0]))
+        # print(self.grid)
+        # print(len(self.grid))
+        # print(len(self.grid[0]))
 if __name__ == '__main__':
     g = Game()
     g.run()
