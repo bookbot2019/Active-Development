@@ -40,10 +40,11 @@ class Game:
                         print (y, end='')
                 print('') # create a new line
                 for x in range(len(self.grid)):
-                    for y in range(len(self.grid[0])):
+                    for y in reversed(range(len(self.grid[0]))):
                         if self.grid[x][y] == True:
-                            self.grid[x][y]= False
-                            self.grid[x][y-1] = True
+                            self.grid[x][y] = False
+                            if y+1 < len(self.grid[0]): 
+                                    self.grid[x][y+1] = True
                             # print(x, y+1)
                     
             if event.type == QUIT:
