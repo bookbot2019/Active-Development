@@ -64,7 +64,7 @@ class Game:
             pygame.draw.line(self.windowSurface,WHITE,(x,1),(x,550), 2)
 
 
-        self.title.render(self.windowSurface)
+        self.title.render(self.windowSurface, self.list1)
         for x in range(len(self.grid)):
             for y in range(len(self.grid[0])):
                 if self.grid[x][y] == True:
