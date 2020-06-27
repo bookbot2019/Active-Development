@@ -1,3 +1,4 @@
+print("Need Help Making Blocks Into Variables For Ease Of Use.")
 import pygame, sys
 from pygame.locals import *
 import base64
@@ -52,8 +53,9 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-    
-    def draw(self):
+    def shapes(self):
+        self.list1 = [(x*50+2, y*50+2)]
+    def draw(self, list1):
         # Handle game rendering
         self.windowSurface.fill(BLACK)
         pygame.draw.rect(self.windowSurface,WHITE,(550,0, 250, 600), 2)
@@ -68,7 +70,7 @@ class Game:
                 if self.grid[x][y] == True:
                     # draw a block in the right place
                     # render_rect(X * 50, Y * 50, )
-                    pygame.draw.rect(self.windowSurface, RED, (x*50+2, y*50+2, 48, 48))
+                    pygame.draw.rect(self.windowSurface, RED, (list1, 48, 48))
         pygame.display.update()
 
     def update(self, deltaTime):
@@ -110,7 +112,8 @@ class Game:
         # self.grid = []
         # for x in range(11):
         #     self.grid.append([False] * 11)
-        self.grid[5][5] = True
+        # self.grid[5][5] = True
+      
         # print(self.grid)
         # print(len(self.grid))
         # print(len(self.grid[0]))
