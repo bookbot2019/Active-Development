@@ -82,13 +82,14 @@ class Game:
             pygame.draw.line(self.windowSurface,WHITE,(x,1),(x,550), 2)
 
 
-        self.title.render(self.windowSurface, self.random_shape)
+        self.title.render(self.windowSurface)
         for x in range(len(self.grid)):
             for y in range(len(self.grid[0])):
                 if self.grid[x][y] == True:
                     # draw a block in the right place
                     # render_rect(X * 50, Y * 50, )
-                    pygame.draw.rect(self.windowSurface, RED, s )
+                    pygame.draw.rect(self.windowSurface, RED, (x*50+2, y*50+2, 48, 48))
+                    # need to change to random shape
         pygame.display.update()
 
     def update(self, deltaTime):
