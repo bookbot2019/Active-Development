@@ -31,7 +31,26 @@ class Game:
             self.update(clock.tick())
             self.draw()
         
+    def random_shape(self):
+        # Returns a list of coordinates for a random shape
+        r = randint(2)     
+        if r == 0:
+            # L shape
+            new_shape = [(4, 0), (5, 0), (4, 1), (4, 2)]
+        elif r == 1:
+            # T shape
+            new_shape = [(4, 1), (5, 1), (6, 1), (5, 0)]
+        elif r == 2:
+            # Square shape
+            new_shape = [(4, 0), (5, 0), (4, 1), (5, 1)]  
+        return new_shape
     
+    def spawn_new_shape(self):
+        # Modify self.grid to spawn a random shape 
+        s = self.random_shape()
+        for coord in s:
+            self.grid[coord[0]][coord[1]] = True 
+
     def handle_events(self):
     
         for event in pygame.event.get():
@@ -53,9 +72,8 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-    def shapes(self):
-        self.list1 = [(x*50+2, y*50+2)]
-    def draw(self, list1):
+
+    def draw(self):
         # Handle game rendering
         self.windowSurface.fill(BLACK)
         pygame.draw.rect(self.windowSurface,WHITE,(550,0, 250, 600), 2)
@@ -64,13 +82,13 @@ class Game:
             pygame.draw.line(self.windowSurface,WHITE,(x,1),(x,550), 2)
 
 
-        self.title.render(self.windowSurface, self.list1)
+        self.title.render(self.windowSurface, self.random_shape)
         for x in range(len(self.grid)):
             for y in range(len(self.grid[0])):
                 if self.grid[x][y] == True:
                     # draw a block in the right place
                     # render_rect(X * 50, Y * 50, )
-                    pygame.draw.rect(self.windowSurface, RED, (list1, 48, 48))
+                    pygame.draw.rect(self.windowSurface, RED, s )
         pygame.display.update()
 
     def update(self, deltaTime):
