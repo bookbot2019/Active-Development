@@ -7,6 +7,7 @@ from RGBTitle import RGBTitle
 from TetrisLogo import logo
 from BSOD import Cancer
 from BSODFont import Death
+from random import randint
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -33,7 +34,7 @@ class Game:
         
     def random_shape(self):
         # Returns a list of coordinates for a random shape
-        r = randint(2)     
+        r = randint(0,2)     
         if r == 0:
             # L shape
             new_shape = [(4, 0), (5, 0), (4, 1), (4, 2)]
@@ -131,8 +132,8 @@ class Game:
         # self.grid = []
         # for x in range(11):
         #     self.grid.append([False] * 11)
-        self.grid[5][5] = True
-      
+        # self.grid[5][5] = True
+        self.spawn_new_shape()
         # print(self.grid)
         # print(len(self.grid))
         # print(len(self.grid[0]))
