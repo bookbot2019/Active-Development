@@ -87,7 +87,7 @@ class Game:
             for y in range(len(self.grid[0])):
                 if self.grid[x][y] == True:
                     # draw a block in the right place
-                    # render_rect(X * 50, Y * 50, )
+                    
                     pygame.draw.rect(self.windowSurface, RED, (x*50+2, y*50+2, 48, 48))
                     # need to change to random shape
         pygame.display.update()
@@ -131,7 +131,7 @@ class Game:
         # self.grid = []
         # for x in range(11):
         #     self.grid.append([False] * 11)
-        # self.grid[5][5] = True
+        self.grid[5][5] = True
       
         # print(self.grid)
         # print(len(self.grid))
