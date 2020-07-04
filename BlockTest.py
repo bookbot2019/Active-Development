@@ -36,36 +36,62 @@ class Game:
         r = randint(0,2)     
         if r == 0:
             # L shape
-            new_shape = [(4, 0), (5, 0), (4, 1), (4, 2)]
+            new_shape = [[4, 0], [5, 0], [4, 1], [4, 2]]
         elif r == 1:
             # T shape
-            new_shape = [(4, 1), (5, 1), (6, 1), (5, 0)]
+            new_shape = [[4, 1], [5, 1], [6, 1], [5, 0]]
         elif r == 2:
             # Square shape
-            new_shape = [(4, 0), (5, 0), (4, 1), (5, 1)]  
+            new_shape = [[4, 0], [5, 0], [4, 1], [5, 1]]  
         return new_shape
     
     def spawn_new_shape(self):
         # Modify self.grid to spawn a random shape 
-        s = self.random_shape()
-        for coord in s:
-            self.grid[coord[0]][coord[1]] = True 
+        self.current_shape = self.random_shape()
+        # s = self.random_shape()
+        # for coord in s:
+            # self.grid[coord[0]][coord[1]] = True 
 
     def handle_events(self):
     
         for event in pygame.event.get():
             if event.type == DOWN:
-                for ix, x in enumerate(self.grid):
-                    for iy, y in enumerate(self.grid[0]):
-                        print (y, end='')
-                print('') # create a new line
+                
+                '''
+                for x, y in self.current_shape:
+                    if self.grid[x][y+1] and not (x, y+1) in self.current_shape:
+                        print('There\'s something below us!')
+                for x, y in self.current_shape:
+                    self.grid[x][y] = False
+                for x, y in self.current_shape:
+                    if y+1 < len(self.grid[0]):
+                        self.grid[x][y+1] = True
+                        print(self.current_shape)
+                        '''
+
+                # Erase stuff in the grid that overlaps self.current_shape
+                for x, y in self.current_shape:
+                    self.grid[x][y] = False
+                # Check if by moving any part of the shape we'll go off the grid.
+                # If so, we hit the bottom and need a new shape
+                for x, y in self.current_shape:
+                    if y+1 >= len(self.grid[0]):
+                        self.spawn_new_shape()
+                # Move y of all coordinates in self.current_shape down 1
+                for c in self.current_shape:
+                    c[1] += 1
+                for x, y in self.current_shape:
+                    self.grid[x][y] = True
+                
+                '''
                 for x in range(len(self.grid)):
                     for y in reversed(range(len(self.grid[0]))):
+                        print(x, y)
                         if self.grid[x][y] == True:
                             self.grid[x][y] = False
                             if y+1 < len(self.grid[0]): 
                                     self.grid[x][y+1] = True
-                            # print(x, y+1)t
+                '''
                     
             if event.type == QUIT:
                 self.running = False
@@ -128,14 +154,7 @@ class Game:
         grid_height = 11
         self.grid = [[0 for x in range(grid_width)] for y in range(grid_height)] 
 
-        # self.grid = []
-        # for x in range(11):
-        #     self.grid.append([False] * 11)
-        # self.grid[5][5] = True
         self.spawn_new_shape()
-        # print(self.grid)
-        # print(len(self.grid))
-        # print(len(self.grid[0]))
 if __name__ == '__main__':
     g = Game()
     g.run()
