@@ -1,4 +1,3 @@
-print("Need Help Making Blocks Into Variables For Ease Of Use.")
 import pygame, sys
 from pygame.locals import *
 import base64
