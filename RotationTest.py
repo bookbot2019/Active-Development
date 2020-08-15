@@ -17,6 +17,28 @@ DOWN = pygame.USEREVENT
 class Game:
     def __init__(self):
         self.running = True
+        self.initialize_shapes()
+        self.shape_rotation = 0
+
+    def initialize_shapes(self):
+        # initialize shapes with all rotations
+        # shapes is a dictionary with a key:value pair of shape name:another dictionary
+        # and inside that dictionary are key:value pairs of rotation:list of coords
+
+        # initialize shapes with no rotations
+        self.shapes = { "L" : { 0:  [[4, 0], [5, 0], [4, 1], [4, 2]],
+                                90: [[0, -4], [0, -5], [1, -4], [2, -4]],
+                                180:[[-4, 0], [-5, 0], [-4, -1], [-4, -2]],
+                                270:[[0, 4], [0, 5], [-1, 4], [-2, 4]]},
+                        "T" : { 0:  [[4, 1], [5, 1], [6, 1], [5, 0]],
+                                90: [[1, -4], [1, -5], [1, -6], [0, -5]],
+                                180:[[-4, -1], [-5, -1], [-6, -1], [-5, 0]],
+                                270:[[-1, 4], [-1, 5], [-1, 6], [0, 5]]},
+                        "S" : { 0: [[4, 0], [5, 0], [4, 1], [5, 1]],
+                                90:[[0, -4], [0, -5], [1, -4], [1, -5]],
+                                180:[[-4, 0], [-5, 0], [-4, -1], [-5, -1]],
+                                270:[[0, 4], [0, 5], [-1, 4], [-1, 5]]}
+
 
     def run(self):
         # The main gameplay loop
